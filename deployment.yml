@@ -3,13 +3,6 @@
   gather_facts: false
   remote_user: root
   tasks:
-   
-
-    - name: Removing docker Image
-      docker_image:
-        name: myimg
-        state: absent
-
     - name: Building The image
       docker_image:
         name: myimg
