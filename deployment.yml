@@ -20,12 +20,10 @@ tasks:
       name: c000
       image: myimg
       state: absent
-
   - name: Removing docker Image
     docker_image:
       name: myimg
       state: absent
-
   - name: Building The image
     docker_image:
       name: myimg
@@ -33,7 +31,6 @@ tasks:
       build: 
         path: /home/ubuntu/Project/
       state: present
-
   - name: Building Container
     docker_container:
       name: c000
