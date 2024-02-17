@@ -13,6 +13,6 @@
     - name: Clone the Git repository
       git:
         repo: https://github.com/Salmansadiq809545/Banking-java-project  # Provide the URL of your Git repository
-        dest: /home/ubuntu/Project/  # Provide the path where you want to clone the repository
+        dest: /home/ubuntu/Salman/  # Provide the path where you want to clone the repository
         version: master  # Specify the branch or tag you want to clone (optional, defaults to 'master')
       # You can provide additional options like 'accept_hostkey', 'depth', etc. as per your requirements
