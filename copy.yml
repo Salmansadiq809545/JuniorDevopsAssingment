@@ -6,8 +6,6 @@
       file:
         path: /home/ubuntu/Pro
         state: directory
-    - name: Install git
-      action: apt name=git state=installed
     - name: clone git repo
       git:
         repo: https://github.com/Salmansadiq809545/Banking-java-project
