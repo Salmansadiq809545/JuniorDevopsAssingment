@@ -1,0 +1,43 @@
+hosts: demo
+gather_facts: false
+remote_user: root
+tasks:
+  - name: Copy directory from master to host
+      copy:
+        src: /var/lib/jenkins/workspace/Newpipeine/
+        dest: /home/ubuntu/Project/
+        mode: 0755
+      become: true
+
+  - name: stopping the container
+    docker_container:
+      name: c000
+      image: myimg
+      state: stopped
+
+  - name: Removing the container
+    docker_container:
+      name: c000
+      image: myimg
+      state: absent
+
+  - name: Removing docker Image
+    docker_image:
+      name: myimg
+      state: absent
+
+  - name: Building The image
+    docker_image:
+      name: myimg
+      source: build
+      build: 
+        path: /home/ubuntu/Project/
+      state: present
+
+  - name: Building Container
+    docker_container:
+      name: c000
+      image: myimg
+      ports:
+        - "8091:8091"
+      state: started 
