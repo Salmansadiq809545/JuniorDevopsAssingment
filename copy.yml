@@ -1,15 +1,18 @@
 ---
-- hosts: demo
-  become: yes
+- name: Clone Git repository to host
+  hosts: demo
+  become: yes  # If you need root privileges to clone the repository
+  
   tasks:
-    - name: Copy directory from master to host
-      file:
-        path: /home/ubuntu/Pro
-        state: directory
-    - name: clone git repo
+    - name: Ensure git is installed
+      package:
+        name: git
+        state: present
+      # Adjust the package manager according to your system (apt, yum, etc.)
+    
+    - name: Clone the Git repository
       git:
-        repo: https://github.com/Salmansadiq809545/Banking-java-project
-        dest: /home/ubuntu/Pro
-        clone: yes
-        update: yes
-                   
+        repo: https://github.com/Salmansadiq809545/Banking-java-project  # Provide the URL of your Git repository
+        dest: /home/ubuntu/Project/  # Provide the path where you want to clone the repository
+        version: master  # Specify the branch or tag you want to clone (optional, defaults to 'master')
+      # You can provide additional options like 'accept_hostkey', 'depth', etc. as per your requirements
