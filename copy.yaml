@@ -1,0 +1,9 @@
+---
+- hosts: demo
+  tasks:
+    - name: Copy directory from master to host
+      copy:
+        src: /var/lib/jenkins/workspace/Newpipeine/
+        dest: /home/ubuntu/Project/
+        mode: 0755
+      become: true
