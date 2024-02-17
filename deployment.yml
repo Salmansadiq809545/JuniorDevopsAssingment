@@ -3,17 +3,7 @@
   gather_facts: false
   remote_user: root
   tasks:
-    - name: stopping the container
-      docker_container:
-        name: c000
-        image: myimg
-        state: stopped
-
-    - name: Removing the container
-      docker_container:
-        name: c000
-        image: myimg
-        state: absent
+   
 
     - name: Removing docker Image
       docker_image:
