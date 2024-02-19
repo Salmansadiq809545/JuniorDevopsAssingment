@@ -1,6 +1,6 @@
 ---
 - name: Clone Git repository to host
-  hosts: [demo]
+  hosts: demo
   become: yes  # If you need root privileges to clone the repository
   
   tasks:
