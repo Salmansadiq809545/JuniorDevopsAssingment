@@ -5,7 +5,7 @@
   tasks:
     - name: Building The image
       docker_image:
-        name: myimg
+        name: salman8095/newimg:v1
         source: build
         build:
           path: /home/ubuntu/Project/
@@ -13,8 +13,8 @@
 
     - name: Building Container
       docker_container:
-        name: c000
-        image: myimg
+        name: Salman
+        image: salman8095/newimg:v1
         ports:
           - "8091:8091"
         state: started
