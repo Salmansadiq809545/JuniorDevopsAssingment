@@ -158,6 +158,6 @@ user_data = <<-EOF
     sudo docker start $(docker ps -aq)
   EOF
   tags = {
-    Name = "Salman-Prod-Server"
+    Name = "Salman-BankProd-Server"
   }
 }
