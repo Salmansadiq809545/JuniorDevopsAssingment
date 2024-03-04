@@ -23,4 +23,4 @@
     command: sudo docker rm C01
 
   - name: Deploy Docker Container
-    command: docker run -itd -p 8084:8091 --name C01 salman8095/banking:v1
+    command: docker run -itd -p 8083:8091 --name C01 salman8095/banking:v1
