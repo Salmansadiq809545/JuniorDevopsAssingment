@@ -15,8 +15,8 @@ spec:
         app: bank
     spec:
       containers:
-      - name: salman
-        image: salman8095/newimg:v1
+      - name: B01
+        image: salman8095/banking:v1
         ports:
         - containerPort: 8091
 
