@@ -124,7 +124,7 @@ resource "aws_security_group" "Proj-secg" {
 # Network Group
 resource "aws_network_interface" "proj-nt" {
   subnet_id       = aws_subnet.proj-subnet.id
-  private_ips     = ["10.0.1.11"]
+  private_ips     = ["10.0.1.12"]
   security_groups = [aws_security_group.Proj-secg.id]
 }
 
@@ -133,7 +133,7 @@ resource "aws_network_interface" "proj-nt" {
 resource "aws_eip" "proj-eip" {
   vpc = true
   network_interface = aws_network_interface.proj-nt.id
-  associate_with_private_ip = "10.0.1.11"
+  associate_with_private_ip = "10.0.1.12"
 }
 
 # Creating ec2 Instance
@@ -152,9 +152,9 @@ user_data = <<-EOF
     sudo apt-get update -y
     sudo apt-get install docker.io -y
     sudo systemctl enable docker
-    sudo docker stop C01
-    sudo docker rm C01
-    sudo docker run -itd -p 8084:8081 --name C01 salman8095/insuranceproject:v1
+    # sudo docker stop C01
+    # sudo docker rm C01
+    sudo docker run -itd -p 8084:8091 --name C01 salman8095/banking:v1
     sudo docker start $(docker ps -aq)
   EOF
   tags = {
