@@ -15,7 +15,7 @@ spec:
         app: bank
     spec:
       containers:
-      - name: B01
+      - name: C01
         image: salman8095/banking:v1
         ports:
         - containerPort: 8091
