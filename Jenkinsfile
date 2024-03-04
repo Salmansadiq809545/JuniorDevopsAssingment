@@ -1,42 +1,33 @@
-pipeline{
-    agent any
-    stages{
-        stage('checkout the code from github'){
-            steps{
-                 git url: 'https://github.com/akshu20791/Banking-java-project/'
-                 echo 'github url checkout'
-            }
-        }
-        stage('codecompile with akshat'){
-            steps{
-                echo 'starting compiling'
-                sh 'mvn compile'
-            }
-        }
-        stage('codetesting with akshat'){
-            steps{
-                sh 'mvn test'
-            }
-        }
-        stage('qa with akshat'){
-            steps{
-                sh 'mvn checkstyle:checkstyle'
-            }
-        }
-        stage('package with akshat'){
-            steps{
-                sh 'mvn package'
-            }
-        }
-        stage('run dockerfile'){
-          steps{
-               sh 'docker build -t myimg .'
-           }
-         }
-        stage('port expose'){
-            steps{
-                sh 'docker run -dt -p 8091:8091 --name c000 myimg'
-            }
-        }   
+node{
+    stage('Git Code Checkout')
+    {
+        git 'https://github.com/Salmansadiq809545/star-agile-insurance-project'
+    }
+    stage('Maven Compile')
+    {
+         sh 'mvn compile'
+    }
+   
+   
+    stage('Maven Package')
+    {
+         sh 'mvn clean package'
+    }
+     stage('Docker Image')
+    {
+        sh 'docker rmi -f salman8095/insuranceproject:v1'
+        
+        sh 'docker build -t salman8095/insuranceproject:v1 .'
+    }
+     stage('Docker push')
+    {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                    sh 'docker push salman8095/insuranceproject:v1'
+                }
+    }
+     stage('Ansible')
+    {
+      ansiblePlaybook become: true, credentialsId: 'ansible', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
     }
 }
