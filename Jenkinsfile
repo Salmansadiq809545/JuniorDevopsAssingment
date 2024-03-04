@@ -1,7 +1,7 @@
 node{
     stage('Git Code Checkout')
     {
-        git 'https://github.com/Salmansadiq809545/star-agile-insurance-project'
+        git 'https://github.com/Salmansadiq809545/Banking-java-project'
     }
     stage('Maven Compile')
     {
