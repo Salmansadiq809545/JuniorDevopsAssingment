@@ -15,15 +15,15 @@ node{
     }
      stage('Docker Image')
     {
-        sh 'docker rmi -f salman8095/insuranceproject:v1'
+        sh 'docker rmi -f salman8095/banking:v1'
         
-        sh 'docker build -t salman8095/insuranceproject:v1 .'
+        sh 'docker build -t salman8095/banking:v1 .'
     }
      stage('Docker push')
     {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push salman8095/insuranceproject:v1'
+                    sh 'docker push salman8095/banking:v1'
                 }
     }
      stage('Ansible')
