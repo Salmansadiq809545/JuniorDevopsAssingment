@@ -1,15 +1,1 @@
----
-- name: Copy directory from server to localhost
-  hosts: demo
-  gather_facts: no
-  tasks:
-    - name: Ensure destination directory exists
-      file:
-        path: /var/lib/jenkins/workspace/Project-Moon/*
-        state: directory
 
-    - name: Copy directory from server to localhost
-      synchronize:
-        src:  /var/lib/jenkins/workspace/Project-Moon/*
-        dest: /home/ubuntu/Project/
-      delegate_to: localhost
