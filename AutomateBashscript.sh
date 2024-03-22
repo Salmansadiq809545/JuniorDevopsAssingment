@@ -1,3 +1,4 @@
+# This is just a Examle Bash Script for deploying Containarized application
 #!/bin/bash
 
 IMAGE_NAME="salman8095/new"
