@@ -1,5 +1,13 @@
 pipeline{
     agent any
+     environment {
+     IMAGE_NAME="salman8095/bankborj"
+     TAG="latest"
+     CONTAINER_NAME="bankcontainer"
+     PORT_MAPPING="8091:8091"
+         
+     }
+     
     stages{
         stage('Git Checkout')
         {
@@ -22,10 +30,24 @@ pipeline{
             }
            
         }
+          stage('Docker Stop Container')
+        {
+            steps{
+                 sh 'docker stop "$CONTAINER_NAME" '
+            }
+           
+        }
+          stage('Docker Remove Container')
+        {
+            steps{
+                 sh 'docker rm "$CONTAINER_NAME" '
+            }
+           
+        }
          stage('Docker Image Creation')
         {
             steps{
-                 sh 'docker build -t salman8095/bankborj:v1 .'
+                 sh 'docker build -t "$IMAGE_NAME:$TAG" .'
             }
            
         }
@@ -34,7 +56,7 @@ pipeline{
             steps{
                  withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                    sh 'docker push salman8095/bankborj:v1'
+                    sh 'docker push "$IMAGE_NAME:$TAG"'
                 }
             }
            
@@ -42,7 +64,7 @@ pipeline{
          stage('Docker Container')
         {
             steps{
-                 sh 'docker run -itd -p 8091:8091 --name bankcontainer salman8095/bankborj:v1 '
+                 sh 'docker run -itd -p "$PORT_MAPPING" --name "$CONTAINER_NAME" "$IMAGE_NAME:$TAG" '
             }
            
         }
